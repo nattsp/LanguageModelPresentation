@@ -4,6 +4,12 @@ author: Natalie Phillips
 date: 3 December 2017
 autosize: true
 
+<style>
+    body{
+        overflow:scroll;
+    }
+</style>
+
 Text Prediction can provide improved speed and consistency
 ========================================================
 
@@ -66,11 +72,12 @@ An effective text prediction application needs to be both accurate and fast. The
 - Quingrams and quadgrams were add to the usual trigrams and bigrams. Longer ngrams gives more context to the word prediction providing more accurate predictions.
 - Unigrams were only used to calculate the Stupid Backoff score. Unigrams predictions on their own are  a poor predictor of the next word.
 - The model was built on single sentences as a prediction coming from across two sentences is less likely to be relevant.
+- Across a smaller test set I found accuracy to be 25% for the first predicted word, 35% in the top 3 and 45% in top 6 predictions. I suspect this may be lower over a larger test set.
 
 ### Speed
 - The ngrams were trimmed to remove rarely appearing combinations of words. Any combination that appeared less than 4 times was culled. The resulting datasizes are between 3mb and 16mb
-
 - The finished ngrams are stored in speed optimised data.tables with indexing  to accelerate table look up.
+- Using system.time averaged across 20 tests the averge elepsed time was 0.055 seconds on my local machine.
 
 Further development
 ========================================================
