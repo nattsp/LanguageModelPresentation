@@ -15,7 +15,7 @@ I have put together a proof of concept text prediction algorithm to demonstrate 
 The models model is live and can be found at -
 <https://nattsapps.shinyapps.io/ShinyTextPrediction/>.
 
-I believe by using our own in-house language mode, we will be able to incorporate our industry specific terms and corporate language style across our comunications.  As often discussed communication with clients is a large part of our brand  we would like all our employees use a common style when communicating with our customers.
+I believe by using our own in-house language mode, we will be able to incorporate our industry specific terms and corporate language style across our communications.  As often discussed communication with clients is a large part of our brand  we would like all our employees use a common style when communicating with our customers.
 
 
 <font size = "5px" >
@@ -25,7 +25,7 @@ Note: All work conducted as part of the Data Science Specialisation Capstone pro
 Language model overview
 ========================================================
 
-This prototype is built on publically available information. The corpus of documents come from mixed sources comprised of blogs, news articles, and twitter feeds.
+This prototype is built on publicly available information. The corpus of documents come from mixed sources comprised of blogs, news articles, and twitter feeds.
 
 
 File    |   File size   |   Number of lines |   Longest text length
@@ -36,8 +36,8 @@ en_US.blogs.txt |   200 Mb  |	899,288  |	40,835
 
 The prediction model is built using the following steps
 - Separated the corpus into training, holdout and test sets.
-- The text was cleened to seperate sentences, remove numbers,  twitter tags and html using quenteda package.
-- Built ngrams and caluclated the score of each ngram using Stupid Backoff method due to its superior speed and reasonable performance.
+- The text was cleaned to separate sentences, remove numbers,  twitter tags and html using quenteda package.
+- Built ngrams and calculated the score of each ngram using Stupid Backoff method due to its superior speed and reasonable performance.
 
 $$
 S(w_i|w^{i-1}_{i-k+1}) = 
@@ -49,7 +49,7 @@ S(w_i|w^{i-1}_{i-k+1}) =
 \\
 S(w_i) = \frac{\text{count}(w_i)}{N}
 $$
-- Built the prodiction model and optimised for speed by converting to data.tables
+- Built the prediction model and optimised for speed by converting to data.tables
 
 <font size="5px">
 See youtube video "4 - 6 - Interpolation - Stanford NLP - Professor Dan Jurafsky & Chris Manning".
@@ -63,12 +63,12 @@ An effective text prediction application needs to be both accurate and fast. The
 
 ### Accuracy
 - To builds a robust prediction algorithm large sample sizes of 60% were taken across each of blogs, news and twitter corpuses. 
-- Quingrams and quadgrams were add to the usual trigrams and bigrams. Longer ngrams gives more context to the word prdiction providing more accurate predictions.
-- Unigrams were only used to calculate the Stupid Backoff score. Unigrams prdictions on their own are  a poor predictor of the next word.
+- Quingrams and quadgrams were add to the usual trigrams and bigrams. Longer ngrams gives more context to the word prediction providing more accurate predictions.
+- Unigrams were only used to calculate the Stupid Backoff score. Unigrams predictions on their own are  a poor predictor of the next word.
 - The model was built on single sentences as a prediction coming from across two sentences is less likely to be relevant.
 
 ### Speed
-- The ngrams were trimmed to remove rarely appearing combinations of words. Any combination that appeard less than 4 times was culled. The resulting datasizes are between 3mb and 16mb
+- The ngrams were trimmed to remove rarely appearing combinations of words. Any combination that appeared less than 4 times was culled. The resulting datasizes are between 3mb and 16mb
 
 - The finished ngrams are stored in speed optimised data.tables with indexing  to accelerate table look up.
 
