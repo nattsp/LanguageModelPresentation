@@ -68,23 +68,16 @@ An effective text prediction application needs to be both accurate and fast. The
 - The model was built on single sentences as a prediction coming from across two sentences is less likely to be relevant.
 
 ### Speed
-- The ngrams were trimmed down to remove rarely appearing combinations of words. Any combination that appeard less than 4 times was culled. The resulting datasizes are a fraction of the size of the original training data as can be seen in the following table:
+- The ngrams were trimmed to remove rarely appearing combinations of words. Any combination that appeard less than 4 times was culled. The resulting datasizes are between 3mb and 16mb
 
-ngram   |   Size Mb
---------|-----------
-quingram | 3
-quadgram | 9
-trigram | 16
-unigram | 3
-
-- Finished ngrams stored in speed optimised data.tables with indexing keys  to accelerate table look up during word prediction.
+- The finished ngrams are stored in speed optimised data.tables with indexing  to accelerate table look up.
 
 Further development
 ========================================================
 
-The next phase of development is an exciting one. If you sponser the this next phase here are a few of the features I plan on implementing.
+I am looking for your investment in the next phase of development which is exciting as I plan on implementing.
 
-- As the document or email grows the word that are more correlated with the rest of the document will be presented higher in suggested word list.
-- Real time updating of words as you type.
-- Training set built around your companies current document set and unique language. The training sets will contain internal communications, reports and customer updates to train the model.
-- Use the hold out set to optimise a coefficient to of correlated words to increase accuracy.
+- As the authors document or email grows the ngram e correlated with the existing document will presented in real time and 
+- Real time word suggestions as you type.
+- Training of the nGrams using our companies current document set and unique language. 
+
