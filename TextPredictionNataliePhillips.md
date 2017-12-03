@@ -24,7 +24,6 @@ Language model overview
 
 This prototype is built on publically available information which was provided to me. The corpus of documents comes from mixed sources comprised of blogs, news articles, and twitter feeds.
 
-Here is an overview of the data:
 
 File    |   File size   |   Number of lines |   Longest text length
 ------- | --------------|----------------- | ---------------------
@@ -32,7 +31,26 @@ en_US.twitter.txt   |   159 Mb   |	236,0148 |	213
 en_US.news.txt  |   196 Mb  |	101,0242 |	11,384
 en_US.blogs.txt |   200 Mb  |	899,288  |	40,835
 
-When we continue to the second phase of this project we will use the companies own internal communications, reports and customer updates to train the model.
+The prediction model is built using the following steps
+- Seperated the corpus into training, holdout and test sets.
+- Examine the data using tidytext.
+- Clean up the text to seperate sentences, remove number, remove twitter tag and html using quenteda package.
+- Build ngrams and caluclate the score of each ngram using Stupid Backoff
+
+$$
+S(w_i|w^{i-1}_{i-k+1}) = 
+\begin{cases}
+    \frac{\text{count}(w^{i}_{i-k+1})}{\text{count}w^{i-1}_{i-k+1})} \; 
+    \text{if count} \; (w^{i}_{i-k+1}) > 0 \\
+    0.4 S(w_i|w^{i-1}_{i-k+2}) \; \text{otherwise}
+\end{cases}
+\\
+S(w_i) = \frac{\text{count}(w_i)}{N}
+$$
+
+see youtube video "4 - 6 - Interpolation - Stanford NLP - Professor Dan Jurafsky & Chris Manning"
+
+
 
 This model is built using the Stupid Backoff method due to its superior speed and reasonable performance.
 
@@ -67,4 +85,5 @@ The next phase of development is an exciting one. If you sponser the this next p
 
 - As the document or email grows the word that are more correlated with the rest of the document will be presented higher in suggested word list.
 - Real time updating of words as you type.
-- Training set built around your companies current document set and unique language.
+- Training set built around your companies current document set and unique language. The training sets will contain internal communications, reports and customer updates to train the model.
+- Use the hold out set to optimise a coefficient to of correlated words to increase accuracy.
